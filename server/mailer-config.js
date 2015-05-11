@@ -6,8 +6,8 @@ Mailer.config({
 Meteor.startup(function() {
 
   Mailer.init({
-    templates: Templates,     // Global Templates namespace, see lib/templates.js.
-    helpers: TemplateHelpers, // Global template helper namespace.
+    templates: EmailService.Templates,     // Global Templates namespace, see lib/templates.js.
+    helpers: EmailService.TemplateHelpers, // Global template helper namespace.
     layout: {
       name: 'emailLayout',
       path: 'emails/layouts/salted/layout.html',   // Relative to 'private' dir.

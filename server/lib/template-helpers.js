@@ -1,4 +1,4 @@
-TemplateHelpers = {
+EmailService.TemplateHelpers = {
 
   enumerate: function(arr, limit, oxfordComma) {
 
@@ -32,10 +32,6 @@ TemplateHelpers = {
 
       return arr.join(', ') + suffix + last;
     }
-  },
-
-  displayName: function(user) {
-    return user.firstName + ''
   }
 
 };

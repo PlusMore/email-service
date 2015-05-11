@@ -1,8 +1,6 @@
-Templates = {};
-
-Templates.welcomeMail = {
-  path: 'emails/welcome-email/template.html',    // Relative to the 'private' dir.
-  scss: 'emails/welcome-email/style.scss',       // Mail specific SCSS.
+EmailService.Templates.welcome = {
+  path: 'emails/welcome/template.html',    // Relative to the 'private' dir.
+  scss: 'emails/welcome/style.scss',       // Mail specific SCSS.
 
   helpers: {
     guestName: function() {
