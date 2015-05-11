@@ -35,6 +35,7 @@ logging@1.0.7
 lookback:emails@0.3.2
 meteor@1.1.5
 meteor-platform@1.2.2
+meteorhacks:cluster@1.6.4
 meteorhacks:ssr@2.1.2
 minifiers@1.1.4
 minimongo@1.0.7
