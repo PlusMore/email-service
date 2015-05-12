@@ -7,7 +7,8 @@ Meteor.methods({
       var reservation = order.reservation;
       var experience = Experiences.findOne(reservation.experienceId);
 
-      var url = stripTrailingSlash(Meteor.settings.apps.admin.url) + "/patron-order/{0}".format(orderId);
+      var adminEndpoint = Cluster.discovery.pickEndpoint('admin');
+      var url = stripTrailingSlash(adminEndpoint) + "/patron-order/{0}".format(orderId);
       var when = moment(reservation.date).zone(reservation.zone);
       when = when.format('MMMM Do YYYY, h:mm a') + " (" + when.calendar() + ")";
 
