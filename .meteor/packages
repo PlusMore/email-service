@@ -10,3 +10,5 @@ insecure
 lookback:emails
 meteorhacks:cluster
 fourseven:scss
+email
+aldeed:simple-schema
