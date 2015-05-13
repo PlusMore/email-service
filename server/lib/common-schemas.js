@@ -33,3 +33,25 @@ EmailService.Schemas.ReservationParty = new SimpleSchema({
     type: Number
   }
 });
+
+EmailService.Schemas.ExperienceReservationEmail = new SimpleSchema({
+  title: {
+    type: String
+  },
+  when: {
+    type: String
+  },
+  party: {
+    type: EmailService.Schemas.ReservationParty
+  },
+  venue: {
+    type: EmailService.Schemas.Venue
+  },
+  guestContactEmail: {
+    type: String
+  },
+  contactPhone: {
+    type: String,
+    optional: true
+  }
+});
