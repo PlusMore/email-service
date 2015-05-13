@@ -12,7 +12,7 @@ Meteor.startup(function() {
     helpers: EmailService.TemplateHelpers, // Global template helper namespace.
     layout: {
       name: 'metro',
-      path: 'emails/themes/metro/layouts/layout.html',   // Relative to 'private' dir.
+      path: 'emails/themes/metro/layouts/header-footer.html',   // Relative to 'private' dir.
       scss: 'emails/themes/metro/layouts/layout.scss'
     }
   });
