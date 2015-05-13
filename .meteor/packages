@@ -8,3 +8,5 @@ meteor-platform
 autopublish
 insecure
 lookback:emails
+meteorhacks:cluster
+fourseven:scss
