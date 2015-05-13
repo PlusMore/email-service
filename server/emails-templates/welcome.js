@@ -1,5 +1,5 @@
 EmailService.Templates.welcome = {
-  path: 'emails/themes/metro/emails/welcome.html',    // Relative to the 'private' dir.
+  path: 'emails/themes/metro/emails/welcome/body.html',    // Relative to the 'private' dir.
   scss: 'emails/themes/metro/emails/welcome.scss',       // Mail specific SCSS.
 
   helpers: {
