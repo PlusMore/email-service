@@ -18,6 +18,3 @@ Meteor.startup(function() {
   });
 
 });
-=
-
-
