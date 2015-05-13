@@ -1,6 +1,6 @@
 EmailService.Templates.welcome = {
-  path: 'emails/welcome/template.html',    // Relative to the 'private' dir.
-  scss: 'emails/welcome/style.scss',       // Mail specific SCSS.
+  path: 'emails/themes/metro/emails/welcome.html',    // Relative to the 'private' dir.
+  scss: 'emails/themes/metro/emails/welcome.scss',       // Mail specific SCSS.
 
   helpers: {
     guestName: function() {
@@ -31,8 +31,7 @@ EmailService.Templates.welcome = {
         imageUrl: "https://www.filepicker.io/api/file/ftJg8FHTxe3agtDzNlPA/convert?w=500&fit=scale&cache=true",
         hotel: hotel,
         guest: user,
-        preheaderTitle: hotel.name + ' | PlusMore',
-        preheaderText: 'Control your stay with PlusMore',
+        preheaderTitle: hotel.name + ' | PlusMore - Control your stay with PlusMore',
         viewInBrowserUrl: 'http://localhost:3000/emails/preview/welcome/Manny'
       };
     }
