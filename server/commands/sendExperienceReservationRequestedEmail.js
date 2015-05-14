@@ -1,33 +1,21 @@
-var commandSchema = _.extend(EmailService.Schemas.ExperienceReservationEmail._schema, {
-  orderId: {
-    type: String,
-  },
-  adminOrderUrl: {
-    type: String
-  }
-});
+Meteor.startup(function(){
+  var commandSchema = _.extend(EmailService.Schemas.ExperienceReservationEmail._schema, {
+    adminOrderUrl: {
+      type: String
+    }
+  });
 
-Meteor.methods({
-  sendExperienceReservationRequestedEmail: function(options) {
-    options = _.pick(options, [
-      'title',
-      'when',
-      'party',
-      'venue',
-      'guestContactEmail',
-      'experienceContactPhone',
-      'orderId',
-      'adminOrderUrl'
-    ]);
-
-      var orderId = order._id;
-      var reservation = order.reservation;
-      var experience = Experiences.findOne(reservation.experienceId);
-
-      var adminEndpoint = Cluster.discovery.pickEndpoint('admin');
-      var url = stripTrailingSlash(adminEndpoint) + "/patron-order/{0}".format(orderId);
-      var when = moment(reservation.date).zone(reservation.zone);
-      when = when.format('MMMM Do YYYY, h:mm a') + " (" + when.calendar() + ")";
+  Meteor.methods({
+    sendExperienceReservationRequestedEmail: function(options) {
+      options = _.pick(options, [
+        'title',
+        'when',
+        'party',
+        'venue',
+        'guestContactEmail',
+        'experienceContactPhone',
+        'adminOrderUrl'
+      ]);
 
       Email.send({
         to: 'order-service@plusmoretablets.com',
@@ -46,7 +34,8 @@ Meteor.methods({
           "\n{0}, {1} {2}".format(options.venue.address.city, options.venue.address.stateCode, options.venue.address.zipcode) +
           "\n{0}".format(options.contactPhone || 'N/A') +
           "\nTo respond to this request, click the link below\n\n" +
-          url
+          options.adminOrderUrl
       });
     }
+  });
 });
