@@ -31,6 +31,9 @@ Meteor.startup(function() {
           "\n{0}, {1} {2}".format(options.venue.address.city, options.venue.address.stateCode, options.venue.address.zipcode) +
           "\n{0}".format(options.contactPhone || 'N/A')
       });
+
+      // TODO: emit event, store log of email sent
+
     }
   });
 });

@@ -1,34 +1,47 @@
-Meteor.methods({
-  sendHotelServiceRequestedEmail: function(order) {
-    this.unblock(); // client doesn't need to wait for this
+Meteor.startup(function() {
+  var commandSchema = new SimpleSchema({
+    guestName: {
+      type: String
+    },
+    when: {
+      type: String
+    },
+    location: {
+      type: String
+    },
+    shortDescription: {
+      type: String
+    },
+    hotelName: {
+      type: String
+    }
+  });
 
-    if (Meteor.isServer) {
-      var orderId = order._id;
-      var serviceRequest = order.service;
-      var room = Rooms.findOne(order.roomId);
-      var hotel = Hotels.findOne(room.hotelId);
-      var user = Meteor.users.findOne(order.userId);
+  Meteor.methods({
+    sendHotelServiceRequestedEmail: function(options) {
+      options = _.pick(options, [
+        'guestName',
+        'when',
+        'location',
+        'shortDescription',
+        'hotelName',
+      ]);
 
-      var url = stripTrailingSlash(Meteor.settings.apps.admin.url) + "/patron-order/{0}".format(orderId);
-      var when = moment(serviceRequest.date).zone(serviceRequest.zone);
-      when = when.format('MMMM Do YYYY, h:mm a') + " (" + when.calendar() + ")";
-
-      var friendlyServiceType = HotelServices.friendlyServiceType(serviceRequest.type);
+      check(options, commandSchema);
 
       // for our information
       Email.send({
-        to: 'order-service@plusmoretablets.com',
+        to: 'order-service+hotel-info@plusmoretablets.com',
         from: "noreply@plusmoretablets.com",
-        subject: "Info: Device in {0} at {1} has requested hotel service.\n\n".format(room.name, hotel.name),
+        subject: "Service Order: {0} | {0} - {1}.\n\n".format(options.hotelName, options.location, options.shortDescription),
         text: "This is an informational email and does not require your service\n\n" +
-          "Device in {0} at {1} has requested hotel service.\n\n".format(room.name, hotel.name) +
           "Request Details:\n\n" +
-          "Guest Name: {0}\n".format(user.displayName()) +
-          "Request Service: {0}\n".format(friendlyServiceType) +
-          "When: {0}\n".format(when) +
-          "\nTo view the status of this request, click the link below\n\n" +
-          url
+          "Hotel: {0}\n".format(options.hotelName) +
+          "Location: {0}\n".format(options.location) +
+          "Guest Name: {0}\n".format(options.guestName) +
+          "Request Service: {0}\n".format(options.shortDescription) +
+          "When: {0}\n".format(options.when)
       });
     }
-  }
+  });
 });
